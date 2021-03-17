@@ -1,0 +1,12 @@
+name: PlateCommands
+version: ${project.version}
+description: ${project.description}
+softdepend: [Vault, BountifulAPI]
+author: A5H73Y
+main: io.github.a5h73y.platecommands.PlateCommands
+api-version: "1.13"
+website: "https://a5h73y.github.io/PlateCommands/"
+commands:
+  platecommands:
+    aliases: [pc, plates]
+    description: PlateCommands commands
