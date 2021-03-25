@@ -82,7 +82,7 @@ public class PlateCommandsUpdater implements Listener {
 				plugin.getLogger().warning("==== " + plugin.getDescription().getName() + " ====");
 				plugin.getLogger().warning("An update for PlateCommands is available: v"
 						+ latestVersion.getOriginalString());
-				plugin.getLogger().warning("Available at: https://www.spigotmc.org/resources/plateCommands.23685/");
+				plugin.getLogger().warning("Available at: https://www.spigotmc.org/resources/plateCommands.90578/");
 				plugin.getLogger().warning("=================");
 				Bukkit.getScheduler().runTask(plugin, () ->
 						Bukkit.getPluginManager().registerEvents(this, plugin));

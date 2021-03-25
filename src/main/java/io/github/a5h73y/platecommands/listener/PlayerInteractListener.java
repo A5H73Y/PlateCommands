@@ -6,8 +6,8 @@ import io.github.a5h73y.platecommands.other.AbstractPluginReceiver;
 import io.github.a5h73y.platecommands.other.DelayTasks;
 import io.github.a5h73y.platecommands.type.PlateAction;
 import io.github.a5h73y.platecommands.utility.PermissionUtils;
+import io.github.a5h73y.platecommands.utility.TranslationUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
@@ -53,19 +53,25 @@ public class PlayerInteractListener extends AbstractPluginReceiver implements Li
 
         if (action != null) {
             Bukkit.getScheduler().runTask(plateCommands, () ->
-                    plateCommands.getPlateActionManager().execute(event.getPlayer(), action));
+                    plateCommands.getPlateActionManager().executePlateAction(event.getPlayer(), action));
         }
     }
 
+    /**
+     * On pressure plate break event.
+     * @param event block break event
+     */
     @EventHandler
     public void onPlateBreak(BlockBreakEvent event) {
-        if (event.getBlock().getType() == Material.STONE_PRESSURE_PLATE
+        if (event.getBlock().getType().name().endsWith("PRESSURE_PLATE")
+                && !event.getPlayer().isSneaking()
                 && plateCommands.getPlateActionManager().getPlateAction(event.getBlock().getLocation()) != null) {
             if (!PermissionUtils.hasPermission(event.getPlayer(), Permission.ADMIN_DELETE)) {
                 event.setCancelled(true);
+
             } else {
-                event.getPlayer().sendMessage("deleted");
                 plateCommands.getPlateActionManager().deletePlateAction(event.getBlock().getLocation());
+                TranslationUtils.sendTranslation("PlateAction.Deleted", event.getPlayer());
             }
         }
     }

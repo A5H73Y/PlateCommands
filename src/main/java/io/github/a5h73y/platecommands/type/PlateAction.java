@@ -1,6 +1,8 @@
 package io.github.a5h73y.platecommands.type;
 
+import io.github.a5h73y.platecommands.utility.TranslationUtils;
 import java.util.List;
+import org.bukkit.entity.Player;
 
 public class PlateAction {
 
@@ -12,6 +14,21 @@ public class PlateAction {
 	private int playerCoolDown;
 	private int globalCoolDown;
 	private double cost;
+
+	/**
+	 * Display a basic summary of the PlateAction's details.
+	 */
+	public void displaySummary(Player player) {
+		TranslationUtils.sendHeading("PlateAction Details", player);
+		TranslationUtils.sendValue(player, "Location", locationKey);
+		TranslationUtils.sendValue(player, "Run as Console", Boolean.toString(runAsConsole));
+		TranslationUtils.sendConditionalValue(player, "Message", message);
+		TranslationUtils.sendConditionalValue(player, "Permission", permission);
+		TranslationUtils.sendConditionalValue(player, "Player Cool-down", playerCoolDown);
+		TranslationUtils.sendConditionalValue(player, "Global Cool-down", globalCoolDown);
+		TranslationUtils.sendConditionalValue(player, "Economy Cost", cost);
+		TranslationUtils.sendValue(player, "Commands", "\n " + String.join("\n ", commands));
+	}
 
 	public String getLocationKey() {
 		return locationKey;

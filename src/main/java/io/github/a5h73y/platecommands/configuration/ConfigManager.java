@@ -1,7 +1,7 @@
 package io.github.a5h73y.platecommands.configuration;
 
-import io.github.a5h73y.platecommands.configuration.impl.PlatesConfig;
 import io.github.a5h73y.platecommands.configuration.impl.DefaultConfig;
+import io.github.a5h73y.platecommands.configuration.impl.PlatesConfig;
 import io.github.a5h73y.platecommands.configuration.impl.StringsConfig;
 import io.github.a5h73y.platecommands.enums.ConfigType;
 import java.io.File;

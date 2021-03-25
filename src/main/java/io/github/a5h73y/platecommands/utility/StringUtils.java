@@ -33,10 +33,22 @@ public class StringUtils {
 				.replace("_", " ");
 	}
 
+	/**
+	 * Extract Message from arguments.
+	 * @param args arguments
+	 * @param startIndex where to begin extraction
+	 * @return message
+	 */
 	public static String extractMessageFromArgs(String[] args, int startIndex) {
 		return extractMessageFromArgs(Arrays.asList(args), startIndex);
 	}
 
+	/**
+	 * Extract Message from arguments.
+	 * @param args arguments
+	 * @param startIndex where to begin extraction
+	 * @return message
+	 */
 	public static String extractMessageFromArgs(List<String> args, int startIndex) {
 		return String.join(" ", args.subList(startIndex, args.size()));
 	}

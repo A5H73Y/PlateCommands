@@ -56,7 +56,7 @@ public abstract class PlateCommandsConfiguration extends YamlConfiguration {
 	/**
 	 * Reload the configuration file.
 	 */
-	protected void reload() {
+	public void reload() {
 		try {
 			this.load(file);
 		} catch (IOException | InvalidConfigurationException e) {

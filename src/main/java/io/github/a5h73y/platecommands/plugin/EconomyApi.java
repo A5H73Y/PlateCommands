@@ -43,17 +43,6 @@ public class EconomyApi extends PluginWrapper {
 	}
 
 	/**
-	 * Reward the Player with an amount.
-	 *
-	 * @param player target player
-	 * @param amount amount to reward
-	 * @return transaction success
-	 */
-	public boolean rewardPlayer(Player player, double amount) {
-		return this.economy.depositPlayer(player, amount).transactionSuccess();
-	}
-
-	/**
 	 * Charge the Player an amount.
 	 *
 	 * @param player target player
@@ -65,17 +54,6 @@ public class EconomyApi extends PluginWrapper {
 	}
 
 	/**
-	 * Check if the Player has the requested amount of currency.
-	 *
-	 * @param player target player
-	 * @param amount amount required
-	 * @return player has sufficient amount
-	 */
-	public boolean hasAmount(Player player, double amount) {
-		return this.economy.has(player, amount);
-	}
-
-	/**
 	 * Get the Economy Currency name.
 	 *
 	 * @return currency name
@@ -83,7 +61,6 @@ public class EconomyApi extends PluginWrapper {
 	public String getCurrencyName() {
 		return economy.currencyNamePlural() == null ? "" : " " + economy.currencyNamePlural();
 	}
-
 
 	/**
 	 * Display the Economy information.

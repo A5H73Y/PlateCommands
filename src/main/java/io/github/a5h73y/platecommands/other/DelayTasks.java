@@ -23,6 +23,14 @@ public enum DelayTasks {
         return INSTANCE;
     }
 
+    /**
+     * Delay the event based on detail key.
+     * If the detail already exists in the cooldown, check if the required seconds have passed.
+     * This allows each pressure plate / player to have a different cooldown amount.
+     * @param detailKey detail key
+     * @param secondsDelay seconds delay
+     * @return event should be delayed
+     */
     public boolean delayEvent(String detailKey, int secondsDelay) {
         if (!delays.containsKey(detailKey)) {
             delays.put(detailKey, System.currentTimeMillis());

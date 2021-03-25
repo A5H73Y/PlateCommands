@@ -15,6 +15,11 @@ public class PlatesConfig extends PlateCommandsConfiguration {
 		// config is empty by default
 	}
 
+	/**
+	 * Get PlateAction by location key from config.
+	 * @param locationKey location key
+	 * @return populated {@link PlateAction}
+	 */
 	public PlateAction getPlateAction(String locationKey) {
 		PlateAction action = new PlateAction();
 		action.setLocationKey(locationKey);

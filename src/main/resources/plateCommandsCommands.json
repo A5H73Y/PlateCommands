@@ -1,0 +1,37 @@
+[
+  {
+    "command": "cmds",
+    "title": "Display PlateCommands commands",
+    "example": "/pc cmds",
+    "description": "Display all the available commands to the requesting player. The list will be built based on player permissions."
+  },
+  {
+    "command": "create",
+    "title": "Create PlateAction",
+    "arguments": "(command[;command])",
+    "example": "/pc create give %player% minecraft:torch 5;give %player% minecraft:elytra 1",
+    "description": "Create an pressure plate at your current location which when walked upon will execute the commands provided. Commands are semicolon ; separated and can include as many commands as you'd like. The %player% placeholder can be used to insert the Player's name who walked upon the pressure plate.",
+    "permission": "PlateCommands.Basic.Create"
+  },
+  {
+    "command": "help",
+    "title": "Display Command Help",
+    "arguments": "(command)",
+    "example": "/carz help purchase",
+    "description": "Display helpful information about the specified command, including syntax and an example."
+  },
+  {
+    "command": "info",
+    "title": "Display PlateAction Info",
+    "example": "/pc info",
+    "description": "When looking at a registered PlateAction, display a summary of the details.",
+    "permission": "PlateCommands.Basic.Info"
+  },
+  {
+    "command": "reload",
+    "title": "Reload the PlateCommands configuration.",
+    "example": "/pc reload",
+    "description": "Reload each of the PlateCommands configuration files; changes made to the config.yml and strings.yml will be immediately applied.",
+    "permission": "PlateCommands.Admin.*"
+  }
+]

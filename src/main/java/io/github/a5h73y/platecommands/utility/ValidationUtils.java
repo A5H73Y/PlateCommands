@@ -105,17 +105,21 @@ public class ValidationUtils {
 		return true;
 	}
 
-	public static boolean canCreatePlateAction(Player player, String locationKey, String... args) {
+	/**
+	 * Can Player create Plate Action.
+	 * @param player player
+	 * @param locationKey block location key
+	 * @return player can create plate action
+	 */
+	public static boolean canCreatePlateAction(Player player, String locationKey) {
 		if (!PermissionUtils.hasPermission(player, Permission.BASIC_CREATE)) {
 			return false;
 		}
 
 		if (PlateCommands.getConfig(ConfigType.PLATES).get(locationKey) != null) {
-			TranslationUtils.sendMessage(player, "An PlateAction already exists here!");
+			TranslationUtils.sendMessage(player, "A PlateAction already exists here!");
 			return false;
 		}
-
-		// TODO not sure what else to validate
 
 		return true;
 	}

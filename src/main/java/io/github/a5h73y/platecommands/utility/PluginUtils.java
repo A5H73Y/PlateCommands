@@ -6,12 +6,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
 
 /**
  * PlateCommands Plugin related utility methods.
@@ -64,18 +59,6 @@ public class PluginUtils {
     }
 
     /**
-     * Debug a message to the console.
-     * Has to be manually enabled in the config.
-     *
-     * @param message message to log
-     */
-    public static void debug(String message) {
-        if (PlateCommands.getDefaultConfig().getBoolean("Debug", false)) {
-            log(message, 3);
-        }
-    }
-
-    /**
      * Write message to `PlateCommands.log` file.
      * Used to log 'incriminating' events to a separate file that can't be erased.
      * Examples: playerA deleted courseB
@@ -106,26 +89,6 @@ public class PluginUtils {
     }
 
     /**
-     * Convert a list of material names to a Set of Materials.
-     *
-     * @param rawMaterials list of material strings
-     * @return Set of {@link Material}
-     */
-    public static Set<Material> convertToValidMaterials(Collection<String> rawMaterials) {
-        Set<Material> validMaterials = new HashSet<>();
-
-        for (String rawMaterial : rawMaterials) {
-            Material material = Material.getMaterial(rawMaterial.toUpperCase());
-            if (material != null) {
-                validMaterials.add(material);
-            } else {
-                log("Material '" + rawMaterial + "' is invalid", 2);
-            }
-        }
-        return validMaterials;
-    }
-
-    /**
      * Get the Server's minor version.
      * Will strip the Bukkit version to just the distinguishable version (14, 15, etc.).
      * If the version is unrecognisable, assume it is under 1.13 (where most things drastically changed).
@@ -135,19 +98,5 @@ public class PluginUtils {
     public static int getMinorServerVersion() {
         String version = Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1];
         return ValidationUtils.isInteger(version) ? Integer.parseInt(version) : 12;
-    }
-
-    /**
-     * Find {@link GameMode} by name.
-     *
-     * @param gameMode requested gamemode
-     * @return matching {@link GameMode}
-     */
-    public static GameMode getGameMode(String gameMode) {
-        return GameMode.valueOf(gameMode.toUpperCase());
-    }
-
-    public static boolean doesGameModeExist(String gameMode) {
-        return getGameMode(gameMode) != null;
     }
 }

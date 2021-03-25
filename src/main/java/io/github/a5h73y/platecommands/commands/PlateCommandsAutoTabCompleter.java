@@ -1,13 +1,12 @@
 package io.github.a5h73y.platecommands.commands;
 
 import io.github.a5h73y.platecommands.PlateCommands;
-import io.github.a5h73y.platecommands.enums.Permission;
 import io.github.a5h73y.platecommands.other.AbstractPluginReceiver;
-import io.github.a5h73y.platecommands.utility.PermissionUtils;
+import io.github.a5h73y.platecommands.other.CommandUsage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -18,10 +17,6 @@ import org.jetbrains.annotations.NotNull;
  * Tab auto-completion for PlateCommands commands.
  */
 public class PlateCommandsAutoTabCompleter extends AbstractPluginReceiver implements TabCompleter {
-
-    private static final List<String> NO_PERMISSION_COMMANDS = Arrays.asList("");
-
-    private static final List<String> ADMIN_ONLY_COMMANDS = Arrays.asList("reload");
 
     public PlateCommandsAutoTabCompleter(final PlateCommands plateCommands) {
         super(plateCommands);
@@ -46,7 +41,11 @@ public class PlateCommandsAutoTabCompleter extends AbstractPluginReceiver implem
         List<String> filteredCommands = new ArrayList<>();
 
         if (args.length == 1) {
-            allowedCommands = populateMainCommands(player);
+            allowedCommands = plateCommands.getCommandUsages().stream()
+                    .filter(commandUsage -> commandUsage.getPermission() == null
+                            || player.hasPermission(commandUsage.getPermission()))
+                    .map(CommandUsage::getCommand)
+                    .collect(Collectors.toList());
         }
 
         for (String allowedCommand : allowedCommands) {
@@ -56,25 +55,5 @@ public class PlateCommandsAutoTabCompleter extends AbstractPluginReceiver implem
         }
 
         return filteredCommands.isEmpty() ? allowedCommands : filteredCommands;
-    }
-
-    /**
-     * Populate the main command options.
-     * @param player player
-     * @return allowed commands
-     */
-    private List<String> populateMainCommands(Player player) {
-        List<String> allowedCommands = new ArrayList<>(NO_PERMISSION_COMMANDS);
-
-        // basic commands
-        if (PermissionUtils.hasPermission(player, Permission.BASIC_INFO, false)) {
-            allowedCommands.add("create");
-        }
-
-        if (PermissionUtils.hasPermission(player, Permission.ADMIN_ALL, false)) {
-            allowedCommands.addAll(ADMIN_ONLY_COMMANDS);
-        }
-
-        return allowedCommands;
     }
 }

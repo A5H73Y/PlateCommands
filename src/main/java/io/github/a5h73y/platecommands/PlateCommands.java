@@ -1,5 +1,6 @@
 package io.github.a5h73y.platecommands;
 
+import com.google.gson.GsonBuilder;
 import io.github.a5h73y.platecommands.commands.PlateCommandsAutoTabCompleter;
 import io.github.a5h73y.platecommands.commands.PlateCommandsCommands;
 import io.github.a5h73y.platecommands.configuration.ConfigManager;
@@ -7,12 +8,19 @@ import io.github.a5h73y.platecommands.configuration.PlateCommandsConfiguration;
 import io.github.a5h73y.platecommands.configuration.impl.DefaultConfig;
 import io.github.a5h73y.platecommands.enums.ConfigType;
 import io.github.a5h73y.platecommands.listener.PlayerInteractListener;
+import io.github.a5h73y.platecommands.other.CommandUsage;
 import io.github.a5h73y.platecommands.other.PlateCommandsUpdater;
 import io.github.a5h73y.platecommands.plugin.BountifulApi;
 import io.github.a5h73y.platecommands.plugin.EconomyApi;
 import io.github.a5h73y.platecommands.type.PlateActionManager;
 import io.github.a5h73y.platecommands.utility.PluginUtils;
 import io.github.a5h73y.platecommands.utility.TranslationUtils;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,13 +30,13 @@ public class PlateCommands extends JavaPlugin {
     public static final String PLUGIN_NAME = "platecommands";
 
     private static final int BSTATS_ID = 10691;
-    private static final int SPIGOT_PLUGIN_ID = 23685;
+    private static final int SPIGOT_PLUGIN_ID = 90578;
     private static PlateCommands instance;
 
     private BountifulApi bountifulApi;
     private EconomyApi economyApi;
 
-//    private List<CommandUsage> commandUsages;
+    private List<CommandUsage> commandUsages;
 
     private ConfigManager configManager;
     private PlateActionManager plateActionManager;
@@ -57,7 +65,7 @@ public class PlateCommands extends JavaPlugin {
 
         getLogger().info("Enabled PlateCommands v" + getDescription().getVersion());
         submitAnalytics();
-//        checkForUpdates();
+        checkForUpdates();
     }
 
     /**
@@ -134,9 +142,9 @@ public class PlateCommands extends JavaPlugin {
         return economyApi;
     }
 
-//    public List<CommandUsage> getCommandUsages() {
-//        return commandUsages;
-//    }
+    public List<CommandUsage> getCommandUsages() {
+        return commandUsages;
+    }
 
     private void setupPlugins() {
         bountifulApi = new BountifulApi();
@@ -154,11 +162,11 @@ public class PlateCommands extends JavaPlugin {
         if (this.getConfig().getBoolean("Other.UseAutoTabCompletion")) {
             getCommand(PLUGIN_NAME).setTabCompleter(new PlateCommandsAutoTabCompleter(this));
         }
-//
-//        String json = new BufferedReader(new InputStreamReader(getResource("plateCommandsCommands.json"), StandardCharsets.UTF_8))
-//                .lines().collect(Collectors.joining("\n"));
-//
-//        commandUsages = Arrays.asList(new GsonBuilder().create().fromJson(json, CommandUsage[].class));
+
+        String json = new BufferedReader(new InputStreamReader(getResource("plateCommandsCommands.json"), StandardCharsets.UTF_8))
+                .lines().collect(Collectors.joining("\n"));
+
+        commandUsages = Arrays.asList(new GsonBuilder().create().fromJson(json, CommandUsage[].class));
     }
 
     private void registerEvents() {
