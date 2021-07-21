@@ -44,7 +44,7 @@ public class BountifulApi extends PluginWrapper {
 	 * @param attemptTitle attempt to show the title
 	 */
 	public void sendTitle(Player player, String title, boolean attemptTitle) {
-		sendFullTitle(player, title, "", attemptTitle);
+		sendFullTitle(player, title, " ", attemptTitle);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class BountifulApi extends PluginWrapper {
 	 * @param attemptTitle attempt to show the title
 	 */
 	public void sendSubTitle(Player player, String subTitle, boolean attemptTitle) {
-		sendFullTitle(player, "", subTitle, attemptTitle);
+		sendFullTitle(player, " ", subTitle, attemptTitle);
 	}
 
 	/**

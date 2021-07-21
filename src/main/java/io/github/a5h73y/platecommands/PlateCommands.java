@@ -12,6 +12,7 @@ import io.github.a5h73y.platecommands.other.CommandUsage;
 import io.github.a5h73y.platecommands.other.PlateCommandsUpdater;
 import io.github.a5h73y.platecommands.plugin.BountifulApi;
 import io.github.a5h73y.platecommands.plugin.EconomyApi;
+import io.github.a5h73y.platecommands.plugin.PlaceholderApi;
 import io.github.a5h73y.platecommands.type.PlateActionManager;
 import io.github.a5h73y.platecommands.utility.PluginUtils;
 import io.github.a5h73y.platecommands.utility.TranslationUtils;
@@ -35,6 +36,7 @@ public class PlateCommands extends JavaPlugin {
 
     private BountifulApi bountifulApi;
     private EconomyApi economyApi;
+    private PlaceholderApi placeholderApi;
 
     private List<CommandUsage> commandUsages;
 
@@ -142,6 +144,10 @@ public class PlateCommands extends JavaPlugin {
         return economyApi;
     }
 
+    public PlaceholderApi getPlaceholderApi() {
+        return placeholderApi;
+    }
+
     public List<CommandUsage> getCommandUsages() {
         return commandUsages;
     }
@@ -149,6 +155,7 @@ public class PlateCommands extends JavaPlugin {
     private void setupPlugins() {
         bountifulApi = new BountifulApi();
         economyApi = new EconomyApi();
+        placeholderApi = new PlaceholderApi();
     }
 
     private void registerManagers() {

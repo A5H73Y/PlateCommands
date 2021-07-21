@@ -74,8 +74,9 @@ public abstract class PlateCommandsConfiguration extends YamlConfiguration {
 		}
 
 		try {
-			file.createNewFile();
-			PluginUtils.log("Created " + getFileName());
+			if (file.createNewFile()) {
+				PluginUtils.log("Created " + getFileName());
+			}
 		} catch (Exception e) {
 			PluginUtils.log("Failed to create file: " + getFileName(), 2);
 			e.printStackTrace();

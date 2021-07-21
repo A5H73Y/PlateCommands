@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 public class PlateAction {
 
 	private String locationKey;
-	private boolean runAsConsole;
 	private List<String> commands;
 	private String message;
 	private String permission;
@@ -21,7 +20,6 @@ public class PlateAction {
 	public void displaySummary(Player player) {
 		TranslationUtils.sendHeading("PlateAction Details", player);
 		TranslationUtils.sendValue(player, "Location", locationKey);
-		TranslationUtils.sendValue(player, "Run as Console", Boolean.toString(runAsConsole));
 		TranslationUtils.sendConditionalValue(player, "Message", message);
 		TranslationUtils.sendConditionalValue(player, "Permission", permission);
 		TranslationUtils.sendConditionalValue(player, "Player Cool-down", playerCoolDown);
@@ -36,14 +34,6 @@ public class PlateAction {
 
 	public void setLocationKey(String locationKey) {
 		this.locationKey = locationKey;
-	}
-
-	public boolean isRunAsConsole() {
-		return runAsConsole;
-	}
-
-	public void setRunAsConsole(boolean runAsConsole) {
-		this.runAsConsole = runAsConsole;
 	}
 
 	public List<String> getCommands() {

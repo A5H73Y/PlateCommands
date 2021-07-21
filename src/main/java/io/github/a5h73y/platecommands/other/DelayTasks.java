@@ -68,6 +68,6 @@ public enum DelayTasks {
             public void run() {
                 delays.clear();
             }
-        }.runTaskTimer(PlateCommands.getInstance(), 0, 3600000);
+        }.runTaskTimer(PlateCommands.getInstance(), 0, 3_600_000);
     }
 }

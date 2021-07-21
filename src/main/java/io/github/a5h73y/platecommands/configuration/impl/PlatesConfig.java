@@ -24,7 +24,6 @@ public class PlatesConfig extends PlateCommandsConfiguration {
 		PlateAction action = new PlateAction();
 		action.setLocationKey(locationKey);
 		action.setCommands(this.getStringList(locationKey + ".Commands"));
-		action.setRunAsConsole(this.getBoolean(locationKey + ".RunAsConsole"));
 		action.setPlayerCoolDown(this.getInt(locationKey + ".PlayerCoolDown"));
 		action.setGlobalCoolDown(this.getInt(locationKey + ".GlobalCoolDown"));
 		action.setMessage(this.getString(locationKey + ".Message"));

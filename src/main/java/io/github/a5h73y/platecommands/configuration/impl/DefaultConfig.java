@@ -22,6 +22,7 @@ public class DefaultConfig extends PlateCommandsConfiguration {
 		this.addDefault("PlateAction.Material", Material.GOLD_BLOCK.name());
 		this.addDefault("PlateAction.PreventPlateStick", false);
 		this.addDefault("PlateAction.IncludeWorldName", true);
+		this.addDefault("PlateAction.DisplayMessageAsTitle", true);
 
 		this.addDefault("Other.CheckForUpdates", true);
 		this.addDefault("Other.LogToFile", true);
@@ -29,6 +30,7 @@ public class DefaultConfig extends PlateCommandsConfiguration {
 
 		this.addDefault("Plugin.BountifulAPI.Enabled", true);
 		this.addDefault("Plugin.Vault.Enabled", true);
+		this.addDefault("Plugin.PlaceholderAPI.Enabled", true);
 
 		this.addDefault("Version", PlateCommands.getInstance().getDescription().getVersion());
 
@@ -45,5 +47,9 @@ public class DefaultConfig extends PlateCommandsConfiguration {
 
 	public boolean getIncludeWorldName() {
 		return this.getBoolean("PlateAction.IncludeWorldName");
+	}
+
+	public boolean getDisplayMessageAsTitle() {
+		return this.getBoolean("PlateAction.DisplayMessageAsTitle");
 	}
 }

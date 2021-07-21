@@ -1,12 +1,12 @@
 package io.github.a5h73y.platecommands.other;
 
-import com.g00fy2.versioncompare.Version;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.a5h73y.platecommands.enums.Permission;
 import io.github.a5h73y.platecommands.utility.PermissionUtils;
 import io.github.a5h73y.platecommands.utility.TranslationUtils;
+import io.github.g00fy2.versioncompare.Version;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;

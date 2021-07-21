@@ -25,6 +25,9 @@ import org.bukkit.entity.Player;
 
 public class PlateActionManager extends AbstractPluginReceiver {
 
+	public static final String PLAYER_COMMAND_PREFIX = "player:";
+	public static final String PLAYER_PLACEHOLDER= "%player%";
+
 	private final Map<String, PlateAction> plateActions = new HashMap<>();
 
 	public PlateActionManager(PlateCommands plateCommands) {
@@ -53,7 +56,7 @@ public class PlateActionManager extends AbstractPluginReceiver {
 
 		if (action.getPlayerCoolDown() > 0
 				&& !DelayTasks.getInstance().delayPlayer(
-						player, action.getLocationKey(), action.getPlayerCoolDown())) {
+				player, action.getLocationKey(), action.getPlayerCoolDown())) {
 			return;
 		}
 
@@ -69,17 +72,33 @@ public class PlateActionManager extends AbstractPluginReceiver {
 		}
 
 		if (ValidationUtils.isStringValid(action.getMessage())) {
-			plateCommands.getBountifulApi().sendSubTitle(player, StringUtils.colour(action.getMessage()), true);
+			String message = StringUtils.colour(parsePlaceholders(player, action.getMessage()));
+			plateCommands.getBountifulApi().sendSubTitle(player, message,
+					plateCommands.getConfig().getDisplayMessageAsTitle());
 		}
 
 		for (String command : action.getCommands()) {
-			command = command.replace("%player%", player.getName());
+			dispatchCommand(player, parsePlaceholders(player, command));
+		}
+	}
 
-			if (action.isRunAsConsole()) {
-				plateCommands.getServer().dispatchCommand(plateCommands.getServer().getConsoleSender(), command);
-			} else {
-				player.performCommand(command);
-			}
+	private String parsePlaceholders(Player player, String command) {
+		command = command.replace(PLAYER_PLACEHOLDER, player.getName());
+		return plateCommands.getPlaceholderApi().evaluatePlaceholders(player, command);
+	}
+
+	/**
+	 * Dispatch command for Player.
+	 * If the commands begins with "player:" it will be player executed, otherwise server executed.
+	 * @param player player
+	 * @param command command to run
+	 */
+	private void dispatchCommand(Player player, String command) {
+		if (command.startsWith(PLAYER_COMMAND_PREFIX)) {
+			player.performCommand(command.split(PLAYER_COMMAND_PREFIX)[1]);
+
+		} else {
+			plateCommands.getServer().dispatchCommand(plateCommands.getServer().getConsoleSender(), command);
 		}
 	}
 
@@ -107,7 +126,6 @@ public class PlateActionManager extends AbstractPluginReceiver {
 		List<String> commands = Arrays.stream(combinedArgs.split(";")).map(String::trim).collect(Collectors.toList());
 
 		platesConfig.set(locationKey + ".Commands", commands);
-		platesConfig.set(locationKey + ".RunAsConsole", true);
 		platesConfig.set(locationKey + ".PlayerCoolDown", 0);
 		platesConfig.set(locationKey + ".GlobalCoolDown", 0);
 		platesConfig.set(locationKey + ".Message", "&fActivated!");

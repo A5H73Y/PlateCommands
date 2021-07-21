@@ -1,7 +1,7 @@
 name: PlateCommands
 version: ${project.version}
 description: ${project.description}
-softdepend: [Vault, BountifulAPI]
+softdepend: [Vault, BountifulAPI, PlaceholderAPI]
 author: A5H73Y
 main: io.github.a5h73y.platecommands.PlateCommands
 api-version: "1.13"

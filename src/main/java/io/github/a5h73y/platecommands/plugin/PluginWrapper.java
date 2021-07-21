@@ -12,7 +12,7 @@ import org.bukkit.plugin.Plugin;
  */
 public abstract class PluginWrapper {
 
-	private boolean enabled = false;
+	private boolean enabled;
 
 	/**
 	 * The name of the 3rd party plugin.
