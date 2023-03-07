@@ -117,9 +117,9 @@ public class PlateActionManager extends AbstractPluginReceiver {
 		PlatesConfig platesConfig = (PlatesConfig) plateCommands.getConfigManager().get(ConfigType.PLATES);
 
 		Block block = player.getLocation().getBlock();
-		block.setType(Material.STONE_PRESSURE_PLATE);
+		block.setType(plateCommands.getConfig().getPlateActionPlateMaterial());
 		Block blockUnder = block.getRelative(BlockFace.DOWN);
-		blockUnder.setType(plateCommands.getConfig().getPlateActionMaterial());
+		blockUnder.setType(plateCommands.getConfig().getPlateActionBlockMaterial());
 
 		String combinedArgs = StringUtils.extractMessageFromArgs(args, 1);
 		// remove the spacing from either side of the command

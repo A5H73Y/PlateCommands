@@ -1,6 +1,5 @@
 package io.github.a5h73y.platecommands.utility;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockIterator;
@@ -19,7 +18,7 @@ public class MaterialUtils {
 		Block lastBlock = iter.next();
 		while (iter.hasNext()) {
 			lastBlock = iter.next();
-			if (lastBlock.getType() != Material.AIR) {
+			if (!lastBlock.isEmpty()) {
 				break;
 			}
 		}

@@ -30,14 +30,14 @@ public class PlayerInteractListener extends AbstractPluginReceiver implements Li
      * @param event PlayerInteractEvent
      */
     @EventHandler
-    public void onAutoStartEvent(PlayerInteractEvent event) {
+    public void onPlateActionEvent(PlayerInteractEvent event) {
         if (event.getAction() != Action.PHYSICAL || event.getClickedBlock() == null) {
             return;
         }
 
         Block below = event.getClickedBlock().getRelative(BlockFace.DOWN);
 
-        if (below.getType() != plateCommands.getConfig().getPlateActionMaterial()) {
+        if (below.getType() != plateCommands.getConfig().getPlateActionBlockMaterial()) {
             return;
         }
 

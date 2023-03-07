@@ -19,7 +19,8 @@ public class DefaultConfig extends PlateCommandsConfiguration {
 	protected void initializeConfig() {
 		this.options().header("==== PlateCommands Config ==== #");
 
-		this.addDefault("PlateAction.Material", Material.GOLD_BLOCK.name());
+		this.addDefault("PlateAction.DefaultPlateMaterial", "STONE_PRESSURE_PLATE");
+		this.addDefault("PlateAction.BlockMaterial", "GOLD_BLOCK");
 		this.addDefault("PlateAction.PreventPlateStick", false);
 		this.addDefault("PlateAction.IncludeWorldName", true);
 		this.addDefault("PlateAction.DisplayMessageAsTitle", true);
@@ -37,8 +38,12 @@ public class DefaultConfig extends PlateCommandsConfiguration {
 		this.options().copyDefaults(true);
 	}
 
-	public Material getPlateActionMaterial() {
-		return Material.valueOf(this.getString("PlateAction.Material"));
+	public Material getPlateActionPlateMaterial() {
+		return Material.valueOf(this.getString("PlateAction.DefaultPlateMaterial"));
+	}
+
+	public Material getPlateActionBlockMaterial() {
+		return Material.valueOf(this.getString("PlateAction.BlockMaterial"));
 	}
 
 	public boolean getPreventPlateStick() {
